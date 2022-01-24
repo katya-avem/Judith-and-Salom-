@@ -9,5 +9,5 @@ Noticing how interestingly these images intersect with each other, we asked ours
 # Goal
 The general goal of the project is to answer art history questions about the relation between two of the most significant female biblical images - Judith and Salome - using open data from [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) and to make a map reflecting the distribution of paintings depicting these heroines in time and space.
 # Team
-•	Ekaterina Kolevatova: Data collection, data manipulation, data cleaning and data analysis.
-•	Ludovica Russo: Web development, data visualization, communication strategy.
+<p>•	Ekaterina Kolevatova: Data collection, data manipulation, data cleaning and data analysis.<br>
+<p>•	Ludovica Russo: Web development, data visualization, communication strategy.</p>

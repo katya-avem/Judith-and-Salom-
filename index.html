@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset="utf-8">
+	<title> Women of the art: Judith and Salomè</title>
+	<meta name="keywords" content="HTML, CSS, JavaScript">
+	<meta name="description" content="Web page for the electronic publishing and digital storytelling project on the biblical object: Judith and Salome">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>	
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Judith">
+	<meta property="description" content="Web page for the electronic publishing and digital storytelling project on the biblical object: Judith and Salome">
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="js/d3.layout.cloud.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/typed.js"></script>
+    <script src="js/data.js"></script>
+	
+	<style type="text/css">
+					
+		html, body {
+			width:   100%;
+			height:  100%;
+			background-size:100% 100%;
+			margin:  00px 00px 00px 00px;
+			}
+				
+		#start {
+			height: 100vh;
+				}		
+						  
+		#intro {
+			background-color: #b98282;
+			background-size: cover;	
+			height: 100vh;
+				}
+				
+		#salome {
+			background-color: #d2a9a9;
+			background-size: cover;	
+			height: 100vh;
+				}
+				
+		#introduction {
+			background-color: #b98282;
+			background-size: cover;	
+			height: 115vh;
+				}
+				
+		#word-cloud svg {
+			display: inline-block;
+    		position: relative;
+    		left: 25%;
+    		width: 50%;
+    		padding-bottom: 100%;
+    		padding-left: 3%;
+    		vertical-align: top;
+    		overflow: hidden;
+					}
+				
+		#visualize {
+			background-color: #b98282;
+			background-size: cover;	
+			height: 190vh;
+				}
+				
+		#world-map {
+			position: relative;
+				}
+				
+		#analize {
+			background-color: #d2a9a9;
+			background-size: cover;	
+			height: 135vh;
+				}
+
+		#conclusion {
+			background-color: #b98282;
+			background-size: cover;	
+			height: 150vh;
+				} 
+		
+		h1, h2, p {
+  			margin: 0;
+				}	
+					
+		/*.cursor {
+			width: 1.5rem;
+			height: 1.5rem;
+			border: 2px solid black;
+			border-radius: 50%;
+			position: absolute;
+			transform: translate (-50%, -50%);
+			pointer-events: none;
+			backdrop-filter: blur(3px);
+				}*/
+								
+		.arrow-down {
+			width:   100%;
+			margin: 0 auto;
+			text-align: center;
+			position: absolute;
+            bottom: 150px;
+					}
+				
+		.arrow-down::after {
+			content:'';
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			margin: auto;
+			top: 0;
+			right: 0;
+			left: 0;
+			border-right: 4px solid #000000;
+			border-bottom: 4px solid #000000;
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+			-webkit-animation:3s arrow infinite ease;
+			animation:3s arrow infinite ease;
+							}
+							
+		@-webkit-keyframes arrow {
+			0%, 100% {
+				top: 50px;
+					}
+			50% {
+				top: 70px;			
+				}
+								}
+								
+		@keyframes arrow {
+			0%, 100% {
+				top: 50px;
+					}
+			50% {
+				top: 70px;			
+				}
+							}
+		
+		#btn {
+ 			background: #222;
+ 			height: 50px;
+  			width: 500px;
+  			border: none;
+  			border-radius: 50px;
+  			color: #eee;
+  			font-size: 20px;
+  			position: relative;
+  			transition: 1s;
+  			-webkit-tap-highlight-color: transparent;
+  			display: flex;
+  			align-items: center;
+  			justify-content: center;
+  			cursor: pointer;
+  			padding-top: 5px;
+					}
+
+		#btn #circle {
+  			width: 20px;
+  			height: 5px;
+  			background: transparent;
+  			border-radius: 50%;
+  			position: absolute;
+  			top: 0;
+  			left: 50%;
+  			overflow: hidden;
+  			transition: 500ms;
+					}
+
+		.noselect {
+  			-webkit-touch-callout: none;
+    		-webkit-user-select: none;
+     		-khtml-user-select: none;
+       		-moz-user-select: none;
+       		-ms-user-select: none;
+            user-select: none;
+				}
+
+		#btn:hover {
+			background: transparent;
+				}
+				
+		.speech-bubble{		
+ 			position: relative;
+  			width: 500px;
+  			height: 120px;
+  			text-align: center;
+  			line-height: 35px;
+  			background-color: #b98282;
+  			border: 5px solid #000;
+  			-webkit-border-radius: 30px;
+  			-moz-border-radius: 30px;
+  			border-radius: 30px;
+  			-webkit-box-shadow: 2px 2px 4px #888;
+  			-moz-box-shadow: 2px 2px 4px #888;
+  			box-shadow: 2px 2px 4px #888;
+					}
+					
+		.speech-bubble:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 0;
+			height: 0;
+			border: 20px solid transparent;
+			border-bottom-color: #000;
+			border-top: 0;
+			border-right: 0;
+			margin-left: -10px;
+			margin-top: -20px;
+					}
+					
+		.arrow-second {
+			width:   100%;
+			margin: 0 auto;
+			text-align: center;
+			position: relative;
+            bottom: 35px;
+					}
+					
+		.arrow-second::after {
+			content: '';
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			margin: auto;
+			top: 0;
+			right: 0;
+			left: 0;
+			border-right: 4px solid #000000;
+			border-bottom: 4px solid #000000;
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+			-webkit-animation:3s arrow infinite ease;
+			animation:3s arrow infinite ease;
+							}
+							
+		@-webkit-keyframes arrow {
+			0%, 100% {
+				top: 50px;
+					}
+			50% {
+				top: 70px;			
+				}
+								}
+								
+		@keyframes arrow {
+			0%, 100% {
+				top: 50px;
+					}
+			50% {
+				top: 70px;			
+				}
+							}
+							
+		#btn1 {
+ 			background: #222;
+ 			height: 50px;
+  			width: 300px;
+  			border: none;
+  			border-radius: 50px;
+  			color: #eee;
+  			font-size: 20px;
+  			position: relative;
+  			transition: 1s;
+  			-webkit-tap-highlight-color: transparent;
+  			display: flex;
+  			align-items: center;
+  			justify-content: center;
+  			cursor: pointer;
+  			padding-top: 5px;
+					}
+
+		#btn1 #circle1 {
+  			width: 20px;
+  			height: 8px;
+  			background: transparent;
+  			border-radius: 50%;
+  			position: relative;
+  			top: 0;
+  			left: 50%;
+  			overflow: hidden;
+  			transition: 500ms;
+					}
+
+		.noselect1 {
+  			-webkit-touch-callout: none;
+    		-webkit-user-select: none;
+     		-khtml-user-select: none;
+       		-moz-user-select: none;
+       		-ms-user-select: none;
+            user-select: none;
+				}
+
+		#btn1:hover {
+			background: transparent;
+				}
+				
+		.speech-bubble1 {		
+ 			position: relative;
+  			width: 500px;
+  			height: 120px;
+  			text-align: center;
+  			line-height: 35px;
+  			background-color: #d2a9a9;
+  			border: 5px solid #000;
+  			-webkit-border-radius: 30px;
+  			-moz-border-radius: 30px;
+  			border-radius: 30px;
+  			-webkit-box-shadow: 2px 2px 4px #888;
+  			-moz-box-shadow: 2px 2px 4px #888;
+  			box-shadow: 2px 2px 4px #888;
+					}
+					
+		.speech-bubble1:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 0;
+			height: 0;
+			border: 20px solid transparent;
+			border-bottom-color: #000;
+			border-top: 0;
+			border-right: 0;
+			margin-left: -10px;
+			margin-top: -20px;
+					}
+					
+		#down {
+			animation: fadeIn 1s infinite alternate;
+			}
+			
+		@keyframes fadeIn { 
+ 			from { opacity: 0; } 
+						}
+						
+		#target {
+ 		 	background:#d2a9a9;
+  			width:500px;
+  			height:300px;
+  			height:260px;
+  			padding:5px;
+  			display:none;
+  			letter-spacing: 1.5px;
+  			text-align: center;
+				}	
+				
+		.about {
+			font-size: 20px;
+  			font-weight: 200;
+  			letter-spacing: 1px;
+  			padding: 13px 50px 13px;
+  			outline: 0;
+  			border: 1px solid black;
+  			cursor: pointer;
+  			position: relative;
+  			background-color: rgba(0, 0, 0, 0);
+				}
+
+		.hide {
+ 			display:none;
+  			font-size: 20px;
+  			font-weight: 200;
+  			letter-spacing: 1px;
+  			padding: 13px 50px 13px;
+  			outline: 0;
+  			border: 1px solid black;
+  			cursor: pointer;
+  			position: relative;
+  			background-color: rgba(0, 0, 0, 0);
+			}
+		
+		span1 {
+			border-width:2px;
+  			border-style:solid;
+  			border-color: #710f0f;
+  			border-right-color:transparent;
+  			width:100%;
+  			height:1em;
+  			transform:rotate(2deg);
+  			opacity:0.7;
+  			border-radius:50%;
+  			padding:0.1em 0.25em;
+			}
+			
+    </style>
+    
+    <script type="text/javascript" id="rendered-js">
+		$(function () {
+  			$('a[href*=#]').on('click', function (e) {
+	    		e.preventDefault();
+    			$('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top }, 500, 'linear');
+  													});
+						});
+    </script>
+</head>
+
+<body>
+<div id="vanta">
+<div class="cursor"></div>
+<section id="header">
+	
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.19/vanta.birds.min.js"></script>
+					<script type="text/javascript">
+						VANTA.BIRDS ({
+  							el: "#vanta",
+ 							mouseControls: true,
+  							touchControls: true,
+  							gyroControls: false,
+  							minHeight: 200.00,
+  							minWidth: 200.00,
+  							scale: 1.00,
+  							scaleMobile: 1.00,
+  							backgroundColor: 0x985555,
+  							color1: 0x0,
+  							color2: 0x930404,
+  							quantity: 3.00,
+ 							backgroundAlpha: 0.16
+  	
+									})
+									
+					</script>
+			
+<br>
+<br>				
+<div id="start">
+	<h1><p><center><b><font face="fantasy" font size="20">WOMEN of the ART</font face></b></center></p></h1>
+	<br>
+	<br>
+		<p><center><font face="Arabic"><b>P R E S E N T</font face></center></p>
+			<center><img src="img/logo.png" width= "250"></center>
+				<br>
+					<p><center><font size=4.5><font face="Apple Chancery, cursive">In an art world where biblical subjects are plentiful,<br>women have always been among the most represented...</font size></h2></center></p>
+						
+						<a href="#intro" class="arrow-down"></a>
+	
+</div>
+</section>
+</div>
+
+<section>
+<div id="intro">
+	
+	<br>
+	<center><font face= "monospace">I N T R O</font face></center>
+		<br>
+			<h2><center><font face="Stencil Std, fantasy">Who hasn't heard of Judith?</h2></font face>
+				<font face="Apple Chancery, cursive"><center>The Braveheart Woman who stood strong to take on Holofernes, a general who laid siege to the Israelite city of Betulia causing great terror!<br><br>
+					<div id="btn"><span class="noselect">Read the story told by our inspiring muse!</span><div id="circle"></div></div>
+			<br>			
+		<img id="Judith" src="img/judithpic.png" style="top:03%; left:80%" width= "150">
+	
+				<br>
+				<br>
+					<div class="speech-bubble">
+						<div id="typewriter">
+							<p>I want to tell you my story.</p>
+							<p>I saved my people with cunning and courage. <br>When I think back to that night I can still feel the adrenaline rushing through my veins.</p>
+							<p>I don't know how it came to me, but I had only one goal: <br>to SAVE my people!</p>
+							<p>I put sandals on my feet, and I put on anklets, bracelets, rings, and all other jewelry. I made myself so beautiful, to attract the eyes of all the men who could see me.</p>
+							<p>But my goal was only Holofernes.</p>
+							<p>I bravely passed through the doors with only my maid for company, was captured by a Babylonian patrol and taken to their camp.</p>
+							<p>I remember how Holofernes was deeply impressed and invited me to stay.</p>
+							<p>I had to wait three long days before the general acted as I wanted.</p>
+							<p>I tried to convince him that I could have the revelation of the sins of my people so that God would give it into their hands him.</p>
+							<p>I was relieved to see how Holofernes himself took advantage of the banquet to seduce me, the plan continued in the right way!</p>
+							<p>To my immense good fortune, when I entered Holofernes' room he was already hopelessly drunk. It was the perfect opportunity to kill him!</p>
+							<p>I approached his bed, I could feel my heartbeat accelerating but no thought distracted me from my goal.</p>
+							<p>I grabbed his head and with all the strength I was capable of, I hit him twice in the neck, knocking his head off!</p>
+						</div>
+						<div id="typed"></div>
+					</div>
+						
+					<a href="#salome" class="arrow-second"></a>
+</div>
+</section>
+
+ <section>
+ <div id="salome">
+ <br>
+ 		<h2><center><font face="Stencil Std, fantasy" font size=5.5>And Salomè...</h2></font face>
+ 			<font face="Apple Chancery, cursive"><center>The Jewish princess forced by her mother, Erodiade, to ask for the head of John the Baptist.<br><br>
+  				<div id="btn1"><span class="noselect1">Read her story too!</span><div id="circle1"></div></div>
+  				<br>
+					<img id="Salomè" src="img/salome.png" style="top:03%; left:80%" width= "150">
+				<br>
+				<br>
+					<div class="speech-bubble1">
+						<div id="typewriter1">
+							<p>Yes, it was me who killed John the Baptist, even though my hands have never touch the sword.</p>
+							<p>That night my words were sharper and more dangerous than a sword.</p>
+							<p>«Give me here on a platter the head of John the Baptist», I said that night to King Herod.</p>
+							<p>You may think that this is cruel or unfair. You may think whatever you want about me.</p>
+							<p>But I just wanted to help my mother. I have always been close to her, well...</p>
+							<p>If she wanted the death of Johann the Baptist, then ... her wish is my wish.</p>
+						</div>
+						<div id="typed1"></div>
+					</div>
+					
+					<br>
+					<br>
+					<div id="down">Scroll down to learn more!</div>
+
+</div>
+</section>
+
+<section>
+<div id="introduction">
+<br>
+	<h3><center><font face="Stencil Std, fantasy">These two women have been depicted by so many artists over the centuries...</h3></font face>
+		<h4><center><font size=4>and the two iconographies have often been confused, especially since many artists drew similar features for both!</h4></font size>
+			<h4><center><font size=5>Among them, only <span1>5</span1>are women artists and <span1>Artemisia Gentileschi</span1>is the one who has made the most works with our icons!</h4></font size>
+		
+		<div id="word-cloud">
+       		<div class="cloud"></div>
+        		<script src="js/wordcloud.js"></script>
+        			<script>
+            			var myWordCloud = wordCloud('.cloud');
+            			showNewWords(myWordCloud);
+        			</script>
+    	</div>
+</div>   	
+</section>
+
+<section>
+<div id=visualize>
+<br>	
+	<hr color="black"><h3><center><font face="Stencil Std, fantasy">The works that represent Judith and Salomè are found in many parts of the world!</h3></font face>
+		<h4><center><font size=5>Let's see where they are↓</h4></font size>
+	<br>
+		<div id="world-map">
+   			<div class="my-map"></div>
+       			<script src="js/worldmap.js"></script>
+       			<br>
+       			<h2><center>There are more than <span1>200</span1> artworks and a large concentration is in Western Europe</h2>
+       				<p><center>Plenty of museums in Belgium and the Netherlands preserve works with these subjects!</p>
+		</div>
+</section>
+
+<section> 
+<div id="analize">	
+<br>
+	<h3><center><font face="Stencil Std, fantasy"> The first representations appear as early as the fifteenth century... </h3></font face>
+
+<br>	 
+<div id="graph">
+	<canvas id="myChart" width="1250" height="500"></canvas>
+        <script>
+            const config = {
+                type: 'line',
+                data: timeline,
+                options: {
+                    responsive: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    			},
+                    stacked: false,
+                		},
+            				};
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, config);
+        </script>
+<br>
+<hr color="black">
+<br>        
+    <h3><center>... and the representations about Salomè have conquered every peak in the <span1>1870s!</span1>thanks to Moreau and his <span1>Symbolism</span1></h3> 
+    	<h3><center>The <span1>Baroque</span1>artistic current made the theme of Judith the most represented, becoming very famous with <span1>Caravaggio</span1>'s interpretation.</h3>
+</div>
+</section>
+
+<section>
+<div id="conclusion">
+<br>
+	<center><h1>THE COMMON ELEMENT...</h1>
+	<br>
+		<center><img id="Klimt" src="img/klimt.png" style="top:03%; left:80%" width= "500" height="350">
+	<br>
+	<br>
+		<h3><center>Although our two women of the past were driven by two different motives, in painting, they both symbolize the destructive beauty of the <span1>femme fatale</span1>, remaining protagonists in the artistic field.</h3>
+	<br>
+	<br>
+		<div id="target"><br>This is a university project regarding the subject Publishing and Digital Storytelling at the University of Bologna.<br>
+						Ekaterina Kolevatova worked on: data access, cleaning and data analysis.<br>
+						Ludovica Russo worked on: web development, data visualization, communication strategy.</div>
+			<button class="about"><font face="Apple Chancery, cursive">About</button>
+			<button class="hide"><font face="Apple Chancery, cursive">About</button>
+		
+</div>
+</section>
+
+	<script type="text/javascript">
+		//let mouseCursor = document.querySelector(".cursor");
+		//window.addEventListener('mousemove', cursor);
+		//document.body.style.cursor = 'none';
+	
+		//function cursor(e){
+		//	mouseCursor.style.top = e.pageY + "px";
+		//	mouseCursor.style.left = e.pageX + "px";
+		// 				}
+						
+		$(function () {
+			$('.speech-bubble').hide();
+			$('#typewriter').hide();
+			$('#btn').click(function(){ 
+				$('.speech-bubble').slideDown(400, function() {
+					var typed = new Typed("#typed", {
+						stringsElement: '#typewriter',
+						typeSpeed: 34,
+						backSpeed: 0,
+						backDelay: 2000,
+						startDelay: 1000,
+						loop: false,
+						showCursor: false
+  									});
+															}); 
+						});
+
+			$('.speech-bubble1').hide();
+			$('#typewriter1').hide();
+			$('#btn1').click(function(){ 
+				$('.speech-bubble1').slideDown(400, function(){
+					var typed = new Typed("#typed1", {
+						stringsElement: '#typewriter1',
+						typeSpeed: 35,
+						backSpeed: 0,
+						backDelay: 2000,
+						startDelay: 1000,
+						loop: false,
+						showCursor: false
+  									});
+															}); 
+										});
+						});
+						
+			$('.about').click(function() {
+   				$('#target').show(500);
+   				    $('.about').hide(0);
+   						 $('.hide').show(0);
+   						 				});
+   						 				
+    		$('.hide').click(function() {
+   				$('#target').hide(500);
+    				$('.about').show(0);
+    					$('.hide').hide(0);
+										});
+										
+													
+    </script>
+						
+						
+						
+						
+	
+</body>
+</html>
+
+
+
+

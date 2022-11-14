@@ -8,7 +8,6 @@ Noticing how interestingly these images intersect with each other, we asked ours
 - In what period of time was Judith more popular, and when did the popularity of images of Salome grow? Were they the same or different periods?
 # Goal
 The general goal of the project is to answer art history questions about the relation between two of the most significant female biblical images - Judith and Salome - using open data from [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) and to make a map reflecting the distribution of paintings depicting these heroines in time and space.
-#Results
 The results of the projects are presented on the website: https://katya-avem.github.io/Judith-and-Salome/
 # Team
 <p>•	Ekaterina Kolevatova: Data collection, data manipulation, data cleaning and data analysis.<br>

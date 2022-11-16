@@ -252,14 +252,18 @@ const timeline = {
         {
             label: 'Judith',
             data: [0,0,0,0,0,0,0,1,0,4,2,2,5,3,3,4,0,3,2,1,9,6,9,6,2,6,1,2,1,1,9,1,3,0,0,2,0,0,1,0,2,0,1,1,2,1,0,2,2,1,3,0,0,0],
-            borderColor: '034f11',
-            backgroundColor: '034f11',
+            borderColor: 'rgba(3, 79, 17, 1)',
+            backgroundColor: 'rgba(3, 79, 17, 1)',
+            // borderColor: '#034f11',
+            // backgroundColor: '#034f11',
         },
         {
             label: 'Salome',
             data: [0,1,1,1,0,0,0,0,0,0,3,6,5,3,1,2,0,1,0,2,5,1,3,2,0,4,0,0,1,0,4,0,0,1,0,0,1,2,0,0,0,0,0,0,1,3,1,18,5,4,10,2,4,1],
-            borderColor: '710f0f',
-            backgroundColor: '710f0f',
+            borderColor: 'rgba(113, 15, 15, 1)',
+            backgroundColor: 'rgba(113, 15, 15, 1)',
+            // borderColor: '#710f0f',
+            // backgroundColor: '#710f0f',
         }
     ]
 };

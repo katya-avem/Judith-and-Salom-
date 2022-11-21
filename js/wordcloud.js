@@ -4,10 +4,10 @@ function wordCloud(selector) {
 
     //Construct the word cloud's SVG element
     var svg = d3.select(selector).append("svg")
-        .attr("width", 250)
-        .attr("height", 250)
+        .attr("width", '1500px')
+        .attr("height", '600px')
         .append("g")
-        .attr("transform", "translate(250,250)");
+        .attr("transform", "translate(750,300)");
 
     //Draw the word cloud
     function draw(words) {
@@ -17,7 +17,6 @@ function wordCloud(selector) {
         //Entering words
         cloud.enter()
             .append("text")
-            .style("font-family", "Apple Chancery")
             .style("fill", function(d, i) { return fill(i); })
             .attr("text-anchor", "middle")
             .attr('font-size', 1)
@@ -55,7 +54,6 @@ function wordCloud(selector) {
                 .words(words)
                 .padding(8)
                 .rotate(function () { return ~~(Math.random() * 2) * 90; })
-                .font("Apple Chancery")
                 .fontSize(function (d) { return d.size; })
                 .on("end", draw)
                 .start();

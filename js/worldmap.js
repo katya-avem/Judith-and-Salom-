@@ -1,13 +1,13 @@
 // Size ?
 var width = 1250
 var height = 500
-var selector = ".my-map"
 
 // The svg
-var svg = d3.select(selector)
-    .append("svg")
+var svg = d3.select('#world-map-svg')
     .attr("width", width)
     .attr("height", height)
+
+var tooltip = d3.select('#world-map-text');
 
 // Map and projection
 var projection = d3.geoMercator()
@@ -17,7 +17,6 @@ var projection = d3.geoMercator()
 
 // Load external data and boot
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function (data) {
-
     // Draw the map
     svg.append("g")
         .selectAll("path")
@@ -25,36 +24,19 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .enter()
         .append("path")
         .attr("fill", "#b8b8b8")
-        .attr("d", d3.geoPath()
-            .projection(projection)
-        )
+        .attr("d", d3.geoPath().projection(projection))
         .style("stroke", "black")
         .style("opacity", .3)
 
-    // create a tooltip
-    var Tooltip = d3.select(selector)
-        .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 1)
-       //.style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "2px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
-
     // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function (d) {
-        Tooltip.style("opacity", 1)
-    }
     var mousemove = function (d) {
-        Tooltip
-            //.html(d.name + "<br>" + "long: " + d.long + "<br>" + "lat: " + d.lat)
-            .html(d.name + "<br>" + d.artworks.join('<br>'))
+        tooltip
+            .html(`<div class="map-title">${d.name}</div>` + d.artworks.reduce((acc, item, i) => acc + `<div class="map-item">${i+1}. ${item}</div>`, ''))
             .style("left", (d3.mouse(this)[0] + 10) + "px")
-            .style("top", (d3.mouse(this)[1]) + "px")
+            .style("top", (d3.mouse(this)[1]) + "px");
     }
     var mouseleave = function (d) {
-        Tooltip.style("opacity", 0)
+        tooltip.html('');
     }
 
     // Add circles:
@@ -71,7 +53,6 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .attr("stroke", "#034f11")
         .attr("stroke-width", 1)
         .attr("fill-opacity", .2)
-        .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 
